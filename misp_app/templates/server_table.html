@@ -1,0 +1,101 @@
+{% extends "layout.html" %}
+
+{% block content %}
+    <div class="container" style="text-align: center;">
+        <div class="row align-items-center" style="margin-top: 80px;">
+          <div class="col h-100 d-flex flex-column" style="font-size: 14px;font-family: \'Rubik\', sans-serif;color:black;">
+            <span><i class="fas fa-link" style="color: #0026E6;"></i> URLs</span>
+            <span class="today-url"></span>
+          </div>
+          <div class="col h-100 d-flex flex-column" style="font-size: 14px;font-family: \'Rubik\', sans-serif;color:black;">
+            <span><i class="fas fa-globe" style="color: #3399FF"></i> Domains</span>
+            <span class="today-domain"></span>
+          </div>
+          <div class="col h-100 d-flex flex-column" style="font-size: 14px;font-family: \'Rubik\', sans-serif;color:black;">
+            <span><i class="fas fa-map-marker-alt" style="color: #02bf0f"></i> IPs</span>
+            <span class="today-ip"></span>
+          </div>
+          <div class="col h-100 d-flex flex-column" style="font-size: 14px;font-family: \'Rubik\', sans-serif;color:black;">
+            <span><i class="fas fa-file-alt" style="color: #FFC34D;"></i> SHA256</span>
+            <span class="today-sha256"></span>
+          </div>
+          <div class="col h-100 d-flex flex-column" style="font-size: 14px;font-family: \'Rubik\', sans-serif;color:black;">
+            <span><i class="fas fa-file-alt" style="color: #FFC34D;"></i> SHA1</span>
+            <span class="today-sha1"></span>
+          </div>
+          <div class="col h-100 d-flex flex-column" style="font-size: 14px;font-family: \'Rubik\', sans-serif;color:black;">
+            <span><i class="fas fa-file-alt" style="color: #ffc591;"></i> MD5</span>
+            <span class="today-md5"></span>
+          </div>
+        </div>  
+        <div class="row align-items-center pb-3" style="margin-top: 5px;">
+          <div class="col h-10 d-flex flex-column" style="font-size: 15px;font-family: \'Rubik\', sans-serif;color:black;">
+            <span> {{ var[0] }} </span>
+            <span class="today-url"></span>
+          </div>
+          <div class="col h-10 d-flex flex-column" style="font-size: 15px;font-family: \'Rubik\', sans-serif;color:black;">
+            <span> {{ var[1] }} </span>
+            <span class="today-domain"></span>
+          </div>
+          <div class="col h-10 d-flex flex-column" style="font-size: 15px;font-family: \'Rubik\', sans-serif;color:black;">
+            <span> {{ var[2] }} </span>
+            <span class="today-ip"></span>
+          </div>
+          <div class="col h-10 d-flex flex-column" style="font-size: 15px;font-family: \'Rubik\', sans-serif;color:black;">
+            <span> {{ var[3] }} </span>
+            <span class="today-sha256"></span>
+          </div>
+          <div class="col h-10 d-flex flex-column" style="font-size: 15px;font-family: \'Rubik\', sans-serif;color:black;">
+            <span> {{ var[4] }}</span>
+            <span class="today-sha1"></span>
+          </div>
+          <div class="col h-10 d-flex flex-column" style="font-size: 15px;font-family: \'Rubik\', sans-serif;color:black;">
+            <span> {{ var[5] }}</span>
+            <span class="today-md5"></span>
+          </div>
+          </div>  
+    </div>
+  <table id="data" class="table table-striped" style="text-align: left;">
+    <thead>
+      <tr class="bg-info text-white">
+        <th style="width: 5%;">Event</th>
+        <th style="width: 8%;">Date</th>
+        <th style="width: 14%;">Category</th>
+        <th style="width: 8%;">Type</th>
+        <th>Value</th>
+        <th>User</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for user in users %}
+        <tr>
+          {% if user.has_Attributes.id %}
+          <td><a href="{{ url_for('event',eventid=user.has_Attributes.id) }}">{{user.has_Attributes.id}}</a></td>
+          {% else %}
+          <td>{{user.has_Attributes.id}}</td>
+          {%endif%}
+          <td>{{user.date_posted.strftime('%Y-%m-%d')}}</td>
+          <td>{{user.Category}}</td>
+          <td>{{user.Type}}</td>
+          <td><a href="{{ url_for('update_att', att_id=user.id) }}">{{user.Value}}</a></td>
+          <td>{{user.author.username}}</td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+{% endblock %}
+{% block scripts %}
+  <script>
+    $(document).ready(function () {
+      $('#data').DataTable({
+        columns: [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null],
+      });
+    });
+  </script>
+{% endblock %}

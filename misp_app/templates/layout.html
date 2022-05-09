@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html>
+<head>
+      <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="{{ url_for('static', filename='a076d05399.js') }}"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='bootstrap.min.css') }}">
+
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='main.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='amsify.suggestags.css') }}">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.5/css/dataTables.bootstrap4.min.css">
+    <style>
+
+
+        
+        tr {
+            transition: all .2s ease-in;
+            cursor: pointer;
+            
+        }
+        
+        .input-group{
+            left: 75%;
+            top: 4%;
+            padding-right: 1px;
+        }
+
+        .status{
+             border-radius:2rem;
+             background-color:red;
+             padding:0.1rem 0.6rem;
+             text-align:center;
+        }
+
+        .status-Down{
+            background-color: #ffcdd2;
+            color: #c62828;
+        }
+        .status-High{
+            background-color: #ffcdd2;
+            color: #c62828;
+        }
+        .status-Medium {
+            background-color: #fff0c2;
+            color: #f1bf21;
+          }
+        .status-Low{
+            background-color: #c8e6c9;
+            color: #388e3c;
+        }
+
+        .status-Up{
+            background-color: #c8e6c9;
+            color: #388e3c;
+        }
+
+        #header {
+            background-color: #507d9b;
+            color: #fff;
+        }
+        #apple {
+        color: #f126f5;
+        }
+        
+        h1 {
+            font-weight: 600;
+            text-align: center;
+            background-color: #ffffff;
+            color: #fff;
+            padding: 10px 0px;
+        }
+        
+        /*tr:hover {
+            background-color: #f5f5f5;
+            transform: scale(1.012);
+            box-shadow: 2px 2px 12px rgba(0, 0, 0, 0.2), -1px -1px 8px rgba(0, 0, 0, 0.2);
+        }*/
+        
+        @media only screen and (max-width: 768px) {
+            table {
+                width: 90%;
+            }
+        }
+    </style>
+</head>
+<body>
+      <header class="site-header">
+        <nav class="navbar navbar-expand-md navbar-dark bg-info fixed-top">
+          <div class="container">
+            <a class="navbar-brand mr-4" href="/">MISP</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggle" aria-controls="navbarToggle" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarToggle">
+              <div class="navbar-nav mr-auto">
+                <a class="nav-item nav-link" href="{{ url_for('home') }}"><i class="fas fa-home"></i> Home</a>
+                <a class="nav-item nav-link" href="{{ url_for('AllEvents') }}"><i class="fa fa-list"></i> List Events</a>
+                <a class="nav-item nav-link" href="{{ url_for('Add_Attributes') }}"><i class="fas fa-plus"></i> Add Attributes</a>
+                <a class="nav-item nav-link" href="{{ url_for('Addevent') }}"><i class="fas fa-plus"></i> Add Events</a>
+                {% if current_user.is_admin == 'true'%}
+                    <a class="nav-item nav-link" href="{{ url_for('feedFromMisp') }}"><i class="fa fa-rss" aria-hidden="true"></i> Feeds</a>
+                    <a class="nav-item nav-link" href="{{ url_for('Client') }}"><i class="fa fa-users" aria-hidden="true"></i> Clients</a>
+                    <a class="nav-item nav-link" href="{{ url_for('register') }}"><i class="fa fa-user-plus" aria-hidden="true"></i> Add User</a>
+                    <a class="nav-item nav-link" href="{{ url_for('Ruselts') }}"><i class="fa fa-bell" aria-hidden="true"></i> Ruselts</a>
+                {% endif %}
+              </div>
+              <!-- Navbar Right Side -->
+              <div class="navbar-nav">
+                {% if current_user.is_authenticated %}
+                    <a class="nav-item nav-link" href="{{ url_for('account') }}"><i class="fas fa-user"></i> Account</a>
+                    <a class="nav-item nav-link" href="{{ url_for('logout') }}"><i class="fa fa-sign-out"></i> Logout</a>
+                {% else %}
+                    <a class="nav-item nav-link" href="{{ url_for('login') }}"><i class="fa fa-sign-in"></i> Login</a>
+                {% endif %}
+              </div>
+            </div>
+          </div>
+        </nav>
+      </header>        
+            {% with messages = get_flashed_messages (with_categories=true) %}
+              {% if messages %}               
+                {% for category, message in messages %}
+                   <div class="alert alert-{{ category }}">
+                     {{ message }}
+                    <button type="button" class="close" data-dismiss="alert">×</button>
+                   </div>
+                {% endfor %}
+              {% endif %}
+            {% endwith %}
+      {% block content %}{% endblock %}
+
+      <script src="{{ url_for('static', filename='jquery-3.3.1.slim.min.js') }}"></script>
+      <script src="{{ url_for('static', filename='popper.min.js') }}"></script>
+      <script src="{{ url_for('static', filename='bootstrap.min.js') }}"></script>
+      <script src="{{ url_for('static', filename='bootstrap.bundle.min.js') }}"></script>
+      <script src="{{ url_for('static', filename='jquery.amsify.suggestags.js') }}"></script>
+      <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
+      <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.5/js/dataTables.bootstrap4.min.js"></script>
+        <script type="text/javascript">
+                $('input[name="tags"]').amsifySuggestags({
+                    suggestions: ['spam', 'phishing', 'virus', 'worm', 'ransomware','trojan-malware','spyware-rat','rootkit','dialer','scanner','sniffing','social-engineering','exploit-known-vuln','login-attempts','new-attack-signature','privileged-account-compromise','unprivileged-account-compromise','botnet-member','domain-compromise','violence','application-compromise','dos','ddos','sabotage','outage','Unauthorised-information-access','Unauthorised-information-modification','copyright','masquerade','vulnerable-service','regulator','standard','security-policy','other-conformity','harmful-speech'],
+                    backgrounds: ['#49f1ed', '#c1e21c', '#42933e', '#f24722', '#fea700','#42933e','#008e63','#56b352','#bf0dcc','#ff0000','#372500','#36a013','#ff9f0f','#595757','#882d0e','#5fb4b2','#f1ee1d','#00fff3','#777174','#991515','#00809c','#f82378','#ff8a00','#0f4d00','#585483','#008ba9','#ef7f5c','#850048','#ef7f5c','#001d3f','#540b39','#6772d6','#37d4e6','#6772d6','#cb57f8'],
+                    whiteList: true,
+                    showPlusAfter: 7
+
+                });
+        </script>
+        {% block scripts %}{% endblock %}
+</body>
+</html>
+

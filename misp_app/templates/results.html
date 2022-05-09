@@ -1,0 +1,17 @@
+{% extends "layout.html" %}
+{% block content %}
+<main role="main" class="container">
+    <div class="row row-cols-auto">
+        {% for var40 in results %}
+            <a 
+                class="btn btn-outline-info col-2 btn-lg my-4 text-dark">
+                <p class="h4">{{var40.client}}</p>
+                <p class="fs-6 fst-italic">{{var40.ipaddress}}</p>
+                {% if var40.feedstatus == 'error'%}
+                <span class="badge rounded-pill bg-danger">Error</span>
+                {% else %}
+                <span class="badge rounded-pill bg-success">Done</span>
+                {%endif%}
+            </a>
+        {% endfor %}
+{% endblock content %}

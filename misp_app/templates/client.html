@@ -1,0 +1,356 @@
+{% extends "layout.html" %}
+{% block content %}
+<main role="main" class="container">
+    <div class="row row-cols-auto">
+        {% if Attribute %}
+            {% for client in Attribute %}
+            <a href="{{ url_for('update_client', client_id=client.id) }}"
+                class="btn btn-outline-info col-2 btn-lg my-4 text-dark">
+                <p class="h4">{{client.clientname}}</p>
+                <p class="fs-6 fst-italic">{{client.q_ip}}</p>
+                {% if client.status == 'Down'%}
+                <span class="badge rounded-pill bg-danger">Down</span>
+                {% else %}
+                <span class="badge rounded-pill bg-success">Up</span>
+                {%endif%}
+            </a>
+            {% endfor %}
+        {% endif %}
+        <a href="{{url_for('AddClients')}}" class="btn btn-outline-info col-2 btn-lg my-4 text-dark">
+            <p class="h4">Add Client</p>
+            <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-plus-circle"
+                viewBox="0 0 16 16">
+                <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
+                <path
+                    d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z" />
+            </svg>
+        </a>
+
+    </div>
+</main>
+
+=========================================================================================================
+
+<div class="chosen-container chosen-container-multi" title="" id="625ba83a37497_chosen" style="width: 85%;"><ul class="chosen-choices">
+  <li class="search-field">
+    <input class="chosen-search-input default" type="text" autocomplete="off" value="Select Some Options" style="width: 147.083px;">
+  </li>
+</ul>
+<div class="chosen-drop">
+  <ul class="chosen-results">
+
+<li class="active-result" data-option-array-index="1">        <span href="#" class="tagComplete" style="background-color:#22681c; color:white">
+                malware_classification:malware-category="Botnet"        </span>
+</li><li class="active-result" data-option-array-index="2">        <span href="#" class="tagComplete" style="background-color:#c1e21c; color:black">
+             C2        </span>
+</li><li class="active-result" data-option-array-index="3">        <span href="#" class="tagComplete" style="background-color:#3b9989; color:white">
+             Cobalt Strike Beacon        </span>
+</li><li class="active-result" data-option-array-index="4">        <span href="#" class="tagComplete" style="background-color:#82b37e; color:black">
+             Decoy        </span>
+</li><li class="active-result" data-option-array-index="5">        <span href="#" class="tagComplete" style="background-color:#9edf47; color:black">
+             DLL Dropper        </span>
+</li><li class="active-result" data-option-array-index="6">        <span href="#" class="tagComplete" style="background-color:#8bfe8c; color:black">
+             Doc(x)        </span>
+</li><li class="active-result" data-option-array-index="7">        <span href="#" class="tagComplete" style="background-color:#49f1ed; color:black">
+             Download        </span>
+</li><li class="active-result" data-option-array-index="8">        <span href="#" class="tagComplete" style="background-color:#160940; color:white">
+             Flash        </span>
+</li><li class="active-result" data-option-array-index="9">        <span href="#" class="tagComplete" style="background-color:#3d7a00; color:white">
+             Malicious Batch Script        </span>
+</li><li class="active-result" data-option-array-index="10">        <span href="#" class="tagComplete" style="background-color:#ffd890; color:black">
+             Ransomware        </span>
+</li><li class="active-result" data-option-array-index="11">        <span href="#" class="tagComplete" style="background-color:#3d7a00; color:white">
+             Smoke Loader        </span>
+</li><li class="active-result" data-option-array-index="12">        <span href="#" class="tagComplete" style="background-color:#3d7a00; color:white">
+             VBS Downloader        </span>
+</li><li class="active-result" data-option-array-index="13">        <span href="#" class="tagComplete" style="background-color:#e8ece2; color:black">
+            "Lingarder Limited"        </span>
+</li><li class="active-result" data-option-array-index="14">        <span href="#" class="tagComplete" style="background-color:#3f86b0; color:white">
+            .kz Domain        </span>
+</li><li class="active-result" data-option-array-index="15">        <span href="#" class="tagComplete" style="background-color:#000000; color:white">
+            10291029JSJUYNHG        </span>
+</li><li class="active-result" data-option-array-index="16">        <span href="#" class="tagComplete" style="background-color:#aa6c53; color:white">
+            Actor: APT28        </span>
+</li><li class="active-result" data-option-array-index="17">        <span href="#" class="tagComplete" style="background-color:#e0b538; color:black">
+            Actor: Lazarus        </span>
+</li><li class="active-result" data-option-array-index="18">        <span href="#" class="tagComplete" style="background-color:#671079; color:white">
+            Actor: Sofacy        </span>
+</li><li class="active-result" data-option-array-index="19">        <span href="#" class="tagComplete" style="background-color:#42933e; color:white">
+            Adware        </span>
+</li><li class="active-result" data-option-array-index="20">        <span href="#" class="tagComplete" style="background-color:#000000; color:white">
+            Anchor        </span>
+</li><li class="active-result" data-option-array-index="21">        <span href="#" class="tagComplete" style="background-color:#211c1c; color:white">
+            Android Malware        </span>
+</li><li class="active-result" data-option-array-index="22">        <span href="#" class="tagComplete" style="background-color:#700bfb; color:white">
+            ANEL        </span>
+</li><li class="active-result" data-option-array-index="23">        <span href="#" class="tagComplete" style="background-color:#f71212; color:white">
+            APT        </span>
+</li><li class="active-result" data-option-array-index="24">        <span href="#" class="tagComplete" style="background-color:#7f3e2d; color:white">
+            ARTILDA CONSULTING LIMITED        </span>
+</li><li class="active-result" data-option-array-index="25">        <span href="#" class="tagComplete" style="background-color:#3F63AD; color:white">
+            attack-pattern:name="password brute forcing"        </span>
+</li><li class="active-result" data-option-array-index="26">        <span href="#" class="tagComplete" style="background-color:#ab875e; color:black">
+            Autoit        </span>
+</li><li class="active-result" data-option-array-index="27">        <span href="#" class="tagComplete" style="background-color:#197ff9; color:white">
+            Backdoor        </span>
+</li><li class="active-result" data-option-array-index="28">        <span href="#" class="tagComplete" style="background-color:#f24722; color:white">
+            Banker        </span>
+</li><li class="active-result" data-option-array-index="29">        <span href="#" class="tagComplete" style="background-color:#6f236b; color:white">
+            Banker: Dridex        </span>
+</li><li class="active-result" data-option-array-index="30">        <span href="#" class="tagComplete" style="background-color:#20ad13; color:white">
+            Banker: Gozi ISFB v2        </span>
+</li><li class="active-result" data-option-array-index="31">        <span href="#" class="tagComplete" style="background-color:#cdce6a; color:black">
+            Banker: TrickBot        </span>
+</li><li class="active-result" data-option-array-index="32">        <span href="#" class="tagComplete" style="background-color:#f02988; color:white">
+            Bokbot        </span>
+</li><li class="active-result" data-option-array-index="33">        <span href="#" class="tagComplete" style="background-color:#bcdb18; color:black">
+            Botnet "3101"        </span>
+</li><li class="active-result" data-option-array-index="34">        <span href="#" class="tagComplete" style="background-color:#fea700; color:black">
+            cert-ist:enriched        </span>
+</li><li class="active-result" data-option-array-index="35">        <span href="#" class="tagComplete" style="background-color:#392500; color:white">
+            cert-ist:ioc_accuracy="high"        </span>
+</li><li class="active-result" data-option-array-index="36">        <span href="#" class="tagComplete" style="background-color:#372500; color:white">
+            cert-ist:ioc_accuracy="medium"        </span>
+</li><li class="active-result" data-option-array-index="37">        <span href="#" class="tagComplete" style="background-color:#764e00; color:white">
+            cert-ist:malware_type="Keylogger"        </span>
+</li><li class="active-result" data-option-array-index="38">        <span href="#" class="tagComplete" style="background-color:#815500; color:white">
+            cert-ist:malware_type="Stealer"        </span>
+</li><li class="active-result" data-option-array-index="39">        <span href="#" class="tagComplete" style="background-color:#3a2600; color:white">
+            cert-ist:threat_level="low"        </span>
+</li><li class="active-result" data-option-array-index="40">        <span href="#" class="tagComplete" style="background-color:#885a00; color:white">
+            cert-ist:threat_targeted_sector="Finance"        </span>
+</li><li class="active-result" data-option-array-index="41">        <span href="#" class="tagComplete" style="background-color:#4d3300; color:white">
+            cert-ist:threat_targeted_system="Windows"        </span>
+</li><li class="active-result" data-option-array-index="42">        <span href="#" class="tagComplete" style="background-color:#f8a400; color:black">
+            cert-ist:threat_type="apt"        </span>
+</li><li class="active-result" data-option-array-index="43">        <span href="#" class="tagComplete" style="background-color:#f6a300; color:black">
+            cert-ist:threat_type="malware_outbreak"        </span>
+</li><li class="active-result" data-option-array-index="44">        <span href="#" class="tagComplete" style="background-color:#ff8e41; color:black">
+            certsi:critical-sector="energy"        </span>
+</li><li class="active-result" data-option-array-index="45">        <span href="#" class="tagComplete" style="background-color:#8b6bca; color:black">
+            CHCHES        </span>
+</li><li class="active-result" data-option-array-index="46">        <span href="#" class="tagComplete" style="background-color:#0ab4a7; color:white">
+            Cobalt Strike        </span>
+</li><li class="active-result" data-option-array-index="47">        <span href="#" class="tagComplete" style="background-color:#54cc21; color:black">
+            core-parser.dll        </span>
+</li><li class="active-result" data-option-array-index="48">        <span href="#" class="tagComplete" style="background-color:#00714f; color:white">
+            cossi:fiabilite="Bonne"        </span>
+</li><li class="active-result" data-option-array-index="49">        <span href="#" class="tagComplete" style="background-color:#008e63; color:white">
+            cossi:RechercheSourceOuverte="Autorisee"        </span>
+</li><li class="active-result" data-option-array-index="50">        <span href="#" class="tagComplete" style="background-color:#008e63; color:white">
+            cossi:RechercheSourceOuverte="Interdite"        </span>
+</li><li class="active-result" data-option-array-index="51">        <span href="#" class="tagComplete" style="background-color:#ffffff; color:black">
+            cossi:TLP="white"        </span>
+</li><li class="active-result" data-option-array-index="52">        <span href="#" class="tagComplete" style="background-color:#b11b8a; color:white">
+            Country: Pakistan        </span>
+</li><li class="active-result" data-option-array-index="53">        <span href="#" class="tagComplete" style="background-color:#0fbf00; color:white">
+            cycat:scope="detection"        </span>
+</li><li class="active-result" data-option-array-index="54">        <span href="#" class="tagComplete" style="background-color:#13f200; color:black">
+            cycat:scope="investigation"        </span>
+</li><li class="active-result" data-option-array-index="55">        <span href="#" class="tagComplete" style="background-color:#b2f8b2; color:black">
+            Decoy        </span>
+</li><li class="active-result" data-option-array-index="56">        <span href="#" class="tagComplete" style="background-color:#00ae7a; color:white">
+            DescriptionTechnique        </span>
+</li><li class="active-result" data-option-array-index="57">        <span href="#" class="tagComplete" style="background-color:#f591da; color:black">
+            Digital Signature        </span>
+</li><li class="active-result" data-option-array-index="58">        <span href="#" class="tagComplete" style="background-color:#ff0000; color:white">
+            dnc:infrastructure-type="exploit-kit"        </span>
+</li><li class="active-result" data-option-array-index="59">        <span href="#" class="tagComplete" style="background-color:#a0a300; color:black">
+            dnc:malware-type="CoinMiner"        </span>
+</li><li class="active-result" data-option-array-index="60">        <span href="#" class="tagComplete" style="background-color:#000000; color:white">
+            dnc:malware-type="Ransomware"        </span>
+</li><li class="active-result" data-option-array-index="61">        <span href="#" class="tagComplete" style="background-color:#56b352; color:black">
+            Download        </span>
+</li><li class="active-result" data-option-array-index="62">        <span href="#" class="tagComplete" style="background-color:#0dcd05; color:white">
+            Downloader        </span>
+</li><li class="active-result" data-option-array-index="63">        <span href="#" class="tagComplete" style="background-color:#302c04; color:white">
+            DPRK        </span>
+</li><li class="active-result" data-option-array-index="64">        <span href="#" class="tagComplete" style="background-color:#ab022a; color:white">
+            Dridex        </span>
+</li><li class="active-result" data-option-array-index="65">        <span href="#" class="tagComplete" style="background-color:#195125; color:white">
+            DROPPER DLLS        </span>
+</li><li class="active-result" data-option-array-index="66">        <span href="#" class="tagComplete" style="background-color:#4de3bf; color:black">
+            Emotet        </span>
+</li><li class="active-result" data-option-array-index="67">        <span href="#" class="tagComplete" style="background-color:#cd05ff; color:white">
+            emotet:epoch="1"        </span>
+</li><li class="active-result" data-option-array-index="68">        <span href="#" class="tagComplete" style="background-color:#1eed40; color:black">
+            expansion:whois-registrant-email        </span>
+</li><li class="active-result" data-option-array-index="69">        <span href="#" class="tagComplete" style="background-color:#0235a3; color:white">
+            FindPOS        </span>
+</li><li class="active-result" data-option-array-index="70">        <span href="#" class="tagComplete" style="background-color:#62459e; color:white">
+            FindStr        </span>
+</li><li class="active-result" data-option-array-index="71">        <span href="#" class="tagComplete" style="background-color:#ff1f00; color:white">
+            fr-classif:non-classifiees="NON-CLASSIFIEES"        </span>
+</li><li class="active-result" data-option-array-index="72">        <span href="#" class="tagComplete" style="background-color:#ff12a0; color:white">
+            HermeticWiper        </span>
+</li><li class="active-result" data-option-array-index="73">        <span href="#" class="tagComplete" style="background-color:#16f5f5; color:black">
+            IcedID        </span>
+</li><li class="active-result" data-option-array-index="74">        <span href="#" class="tagComplete" style="background-color:#DADCF0; color:black">
+            inthreat:event-src="feed-osint"        </span>
+</li><li class="active-result" data-option-array-index="75">        <span href="#" class="tagComplete" style="background-color:#2be799; color:black">
+            Keylogger        </span>
+</li><li class="active-result" data-option-array-index="76">        <span href="#" class="tagComplete" style="background-color:#bd472d; color:white">
+            keylogger/infostealer        </span>
+</li><li class="active-result" data-option-array-index="77">        <span href="#" class="tagComplete" style="background-color:#6ed8f0; color:black">
+            Lokibot        </span>
+</li><li class="active-result" data-option-array-index="78">        <span href="#" class="tagComplete" style="background-color:#bf0dcc; color:white">
+            maldoc        </span>
+</li><li class="active-result" data-option-array-index="79">        <span href="#" class="tagComplete" style="background-color:#700cf0; color:white">
+            MalSpam        </span>
+</li><li class="active-result" data-option-array-index="80">        <span href="#" class="tagComplete" style="background-color:#777174; color:white">
+            Malvertising        </span>
+</li><li class="active-result" data-option-array-index="81">        <span href="#" class="tagComplete" style="background-color:#403c80; color:white">
+            Malware: PowerRatankba,b        </span>
+</li><li class="active-result" data-option-array-index="82">        <span href="#" class="tagComplete" style="background-color:#89a9b6; color:black">
+            Malware: Zebrocy        </span>
+</li><li class="active-result" data-option-array-index="83">        <span href="#" class="tagComplete" style="background-color:#ad00ff; color:white">
+            malware:emotet        </span>
+</li><li class="active-result" data-option-array-index="84">        <span href="#" class="tagComplete" style="background-color:#0dd733; color:white">
+            Memory Scraper        </span>
+</li><li class="active-result" data-option-array-index="85">        <span href="#" class="tagComplete" style="background-color:#ff0000; color:white">
+            Mirai        </span>
+</li><li class="active-result" data-option-array-index="86">        <span href="#" class="tagComplete" style="background-color:#777c00; color:white">
+            ncsc-nl-ndn:feed="generic"        </span>
+</li><li class="active-result" data-option-array-index="87">        <span href="#" class="tagComplete" style="background-color:#76d2b6; color:black">
+            ncsc-nl-ndn:feed="selected"        </span>
+</li><li class="active-result" data-option-array-index="88">        <span href="#" class="tagComplete" style="background-color:#ffffff; color:black">
+            OSINT        </span>
+</li><li class="active-result" data-option-array-index="89">        <span href="#" class="tagComplete" style="background-color:#a5de2c; color:black">
+            ostap        </span>
+</li><li class="active-result" data-option-array-index="90">        <span href="#" class="tagComplete" style="background-color:#36a013; color:white">
+            Panda Banker        </span>
+</li><li class="active-result" data-option-array-index="91">        <span href="#" class="tagComplete" style="background-color:#ab34e3; color:white">
+            PasteBin: MALWAREMESSIAGH        </span>
+</li><li class="active-result" data-option-array-index="92">        <span href="#" class="tagComplete" style="background-color:#cb57f8; color:black">
+            Payload        </span>
+</li><li class="active-result" data-option-array-index="93">        <span href="#" class="tagComplete" style="background-color:#888f83; color:black">
+            PDF        </span>
+</li><li class="active-result" data-option-array-index="94">        <span href="#" class="tagComplete" style="background-color:#856c13; color:white">
+            Phishing        </span>
+</li><li class="active-result" data-option-array-index="95">        <span href="#" class="tagComplete" style="background-color:#37d4e6; color:black">
+            Point-of-Sale        </span>
+</li><li class="active-result" data-option-array-index="96">        <span href="#" class="tagComplete" style="background-color:#7bd107; color:black">
+            PoSeidon        </span>
+</li><li class="active-result" data-option-array-index="97">        <span href="#" class="tagComplete" style="background-color:#ffc100; color:black">
+            poshc2 beacon        </span>
+</li><li class="active-result" data-option-array-index="98">        <span href="#" class="tagComplete" style="background-color:#7a0e9f; color:white">
+            PowerRatankba        </span>
+</li><li class="active-result" data-option-array-index="99">        <span href="#" class="tagComplete" style="background-color:#2133c6; color:white">
+            Powershell        </span>
+</li><li class="active-result" data-option-array-index="100">        <span href="#" class="tagComplete" style="background-color:#10e874; color:black">
+            Powershell Empire        </span>
+</li><li class="active-result" data-option-array-index="101">        <span href="#" class="tagComplete" style="background-color:#7036f2; color:white">
+            PowerShell Installer        </span>
+</li><li class="active-result" data-option-array-index="102">        <span href="#" class="tagComplete" style="background-color:#6772d6; color:black">
+            PowerView        </span>
+</li><li class="active-result" data-option-array-index="103">        <span href="#" class="tagComplete" style="background-color:#db00c5; color:white">
+            PyXie        </span>
+</li><li class="active-result" data-option-array-index="104">        <span href="#" class="tagComplete" style="background-color:#ff9f0f; color:black">
+            racoon        </span>
+</li><li class="active-result" data-option-array-index="105">        <span href="#" class="tagComplete" style="background-color:#000000; color:white">
+            Ransomware        </span>
+</li><li class="active-result" data-option-array-index="106">        <span href="#" class="tagComplete" style="background-color:#000000; color:white">
+            ransomware:ALPHV        </span>
+</li><li class="active-result" data-option-array-index="107">        <span href="#" class="tagComplete" style="background-color:#000000; color:white">
+            ransomware:blackcat        </span>
+</li><li class="active-result" data-option-array-index="108">        <span href="#" class="tagComplete" style="background-color:#540b39; color:white">
+            RAT        </span>
+</li><li class="active-result" data-option-array-index="109">        <span href="#" class="tagComplete" style="background-color:#787ad7; color:black">
+            RAWINPUT        </span>
+</li><li class="active-result" data-option-array-index="110">        <span href="#" class="tagComplete" style="background-color:#84cd7f; color:black">
+            REDLEAVES        </span>
+</li><li class="active-result" data-option-array-index="111">        <span href="#" class="tagComplete" style="background-color:#595757; color:white">
+            Remcos RAT        </span>
+</li><li class="active-result" data-option-array-index="112">        <span href="#" class="tagComplete" style="background-color:#8aec22; color:black">
+            report:5ZvWjgDgRhuD1zVgDT7-cg        </span>
+</li><li class="active-result" data-option-array-index="113">        <span href="#" class="tagComplete" style="background-color:#006ded; color:white">
+            riskiq:threat-name="scam-scareware"        </span>
+</li><li class="active-result" data-option-array-index="114">        <span href="#" class="tagComplete" style="background-color:#001e41; color:white">
+            riskiq:threat-type="c2"        </span>
+</li><li class="active-result" data-option-array-index="115">        <span href="#" class="tagComplete" style="background-color:#002149; color:white">
+            riskiq:threat-type="credit-card-stealer"        </span>
+</li><li class="active-result" data-option-array-index="116">        <span href="#" class="tagComplete" style="background-color:#001d3f; color:white">
+            riskiq:threat-type="exploit-kit"        </span>
+</li><li class="active-result" data-option-array-index="117">        <span href="#" class="tagComplete" style="background-color:#00234d; color:white">
+            riskiq:threat-type="scam"        </span>
+</li><li class="active-result" data-option-array-index="118">        <span href="#" class="tagComplete" style="background-color:#073972; color:white">
+            rkey: "wearenotcobaltthanks"        </span>
+</li><li class="active-result" data-option-array-index="119">        <span href="#" class="tagComplete" style="background-color:#882d0e; color:white">
+            RTF        </span>
+</li><li class="active-result" data-option-array-index="120">        <span href="#" class="tagComplete" style="background-color:#421b85; color:white">
+            Ruse: Job Application        </span>
+</li><li class="active-result" data-option-array-index="121">        <span href="#" class="tagComplete" style="background-color:#c311f0; color:white">
+            Ryuk        </span>
+</li><li class="active-result" data-option-array-index="122">        <span href="#" class="tagComplete" style="background-color:#1ae080; color:black">
+            SCRIPTLET        </span>
+</li><li class="active-result" data-option-array-index="123">        <span href="#" class="tagComplete" style="background-color:#3b947c; color:white">
+            Signed        </span>
+</li><li class="active-result" data-option-array-index="124">        <span href="#" class="tagComplete" style="background-color:#000000; color:white">
+            SMB        </span>
+</li><li class="active-result" data-option-array-index="125">        <span href="#" class="tagComplete" style="background-color:#875737; color:white">
+            source:OSINT        </span>
+</li><li class="active-result" data-option-array-index="126">        <span href="#" class="tagComplete" style="background-color:#ff8a00; color:black">
+            Source:Urlscan.io        </span>
+</li><li class="active-result" data-option-array-index="127">        <span href="#" class="tagComplete" style="background-color:#5fb4b2; color:black">
+            Stage 1        </span>
+</li><li class="active-result" data-option-array-index="128">        <span href="#" class="tagComplete" style="background-color:#fccc51; color:black">
+            Stage 2        </span>
+</li><li class="active-result" data-option-array-index="129">        <span href="#" class="tagComplete" style="background-color:#a9b7b8; color:black">
+            Stantinko        </span>
+</li><li class="active-result" data-option-array-index="130">        <span href="#" class="tagComplete" style="background-color:#ef1515; color:white">
+            Symantec        </span>
+</li><li class="active-result" data-option-array-index="131">        <span href="#" class="tagComplete" style="background-color:#b5654e; color:white">
+            TerraLoader        </span>
+</li><li class="active-result" data-option-array-index="132">        <span href="#" class="tagComplete" style="background-color:#2ac804; color:white">
+            Thawte        </span>
+</li><li class="active-result" data-option-array-index="133">        <span href="#" class="tagComplete" style="background-color:#009922; color:white">
+            Threat Source:OSINT        </span>
+</li><li class="active-result" data-option-array-index="134">        <span href="#" class="tagComplete" style="background-color:#0f4d00; color:white">
+            Threat Type:APT        </span>
+</li><li class="active-result" data-option-array-index="135">        <span href="#" class="tagComplete" style="background-color:#1f9900; color:white">
+            Threat Type:RAT        </span>
+</li><li class="active-result" data-option-array-index="136">        <span href="#" class="tagComplete" style="background-color:#f1ee1d; color:black">
+            Threat:Sofacy/APT28        </span>
+</li><li class="active-result" data-option-array-index="137">        <span href="#" class="tagComplete" style="background-color:#991515; color:white">
+            trickbot        </span>
+</li><li class="active-result" data-option-array-index="138">        <span href="#" class="tagComplete" style="background-color:#00fff3; color:black">
+            Trj=Doublepulsar        </span>
+</li><li class="active-result" data-option-array-index="139">        <span href="#" class="tagComplete" style="background-color:#f20f53; color:white">
+            Turla        </span>
+</li><li class="active-result" data-option-array-index="140">        <span href="#" class="tagComplete" style="background-color:#9e0561; color:white">
+            UNC1151        </span>
+</li><li class="active-result" data-option-array-index="141">        <span href="#" class="tagComplete" style="background-color:#94fdc4; color:black">
+            UPPERCUT        </span>
+</li><li class="active-result" data-option-array-index="142">        <span href="#" class="tagComplete" style="background-color:#bd8c8c; color:black">
+            Ursnif        </span>
+</li><li class="active-result" data-option-array-index="143">        <span href="#" class="tagComplete" style="background-color:#585483; color:white">
+            var BV = "6.0"        </span>
+</li><li class="active-result" data-option-array-index="144">        <span href="#" class="tagComplete" style="background-color:#007d98; color:white">
+            veris:actor:motive="Espionage"        </span>
+</li><li class="active-result" data-option-array-index="145">        <span href="#" class="tagComplete" style="background-color:#007c97; color:white">
+            veris:actor:motive="Financial"        </span>
+</li><li class="active-result" data-option-array-index="146">        <span href="#" class="tagComplete" style="background-color:#008ba9; color:white">
+            veris:asset:variety="S - Remote access"        </span>
+</li><li class="active-result" data-option-array-index="147">        <span href="#" class="tagComplete" style="background-color:#00839f; color:white">
+            veris:asset:variety="S - SCADA"        </span>
+</li><li class="active-result" data-option-array-index="148">        <span href="#" class="tagComplete" style="background-color:#0083a0; color:white">
+            veris:asset:variety="T - ATM"        </span>
+</li><li class="active-result" data-option-array-index="149">        <span href="#" class="tagComplete" style="background-color:#00809c; color:white">
+            veris:asset:variety="U - POS terminal"        </span>
+</li><li class="active-result" data-option-array-index="150">        <span href="#" class="tagComplete" style="background-color:#ef7f5c; color:black">
+            Version 15.10        </span>
+</li><li class="active-result" data-option-array-index="151">        <span href="#" class="tagComplete" style="background-color:#3e9874; color:white">
+            Version: 1057        </span>
+</li><li class="active-result" data-option-array-index="152">        <span href="#" class="tagComplete" style="background-color:#e82e45; color:white">
+            VT:More than 10 URLs detected        </span>
+</li><li class="active-result" data-option-array-index="153">        <span href="#" class="tagComplete" style="background-color:#b2f9b1; color:black">
+            Word Doc(x)        </span>
+</li><li class="active-result" data-option-array-index="154">        <span href="#" class="tagComplete" style="background-color:#850048; color:white">
+            workflow:todo="create-missing-misp-galaxy-cluster-values"        </span>
+</li><li class="active-result" data-option-array-index="155">        <span href="#" class="tagComplete" style="background-color:#cb58ae; color:black">
+            Zero Day        </span>
+</li><li class="active-result" data-option-array-index="156">        <span href="#" class="tagComplete" style="background-color:#f82378; color:white">
+            zloader        </span>
+</li></ul>
+</div></div>
+{% endblock content %}

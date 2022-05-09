@@ -1,0 +1,96 @@
+{% extends "layout.html" %}
+{% block content %}
+<div class="container">
+    <form action="{{ url_for('Addevent') }}" method = "POST">
+            <h3>Add event with id : {{lastid}}</h3>
+        <table class="table">
+            <tr>
+                <td>Event name</td>
+                <td><input type = "text" id="event_name" name ="event_name" class="form-control" /></td>
+            </tr>
+            <tr>
+                <td>Creator org</td>
+                <td><input type = "text" id="Creator_org" name = "Creator_org" class="form-control" /></td>
+            </tr>
+
+            <tr>
+                <td>Owner org</td>
+                <td><input type = "text" id="Owner_org" name = "Owner_org" class="form-control" /></td>
+            </tr>
+
+            <tr>
+                <td>Creator user</td>
+                <td><input type = "text" id="Creator_user" name = "Creator_user" class="form-control"/></td>
+                <script>
+                     document.getElementById('Creator_user').value="{{Creator_name}}";
+                </script>
+            </tr>
+
+            <tr>
+                <td>Tags</td>
+                <td>
+                    <div class="form-group" data-multiSelect="">
+                        <input type="hidden" id="tags" name="tags"/>
+                    </div>
+                </td>
+            </tr>
+
+            <tr>
+                <td>Date</td>
+                <td><input type="date" id="date" name="date" value="2022-04-19" min="2018-01-01" max="2030-12-31"></td>
+            </tr>
+
+            <tr>
+                <td>Threat Level</td>
+                <td>
+                <select id = "Threat_Level" name="Threat_Level" class="form-control">
+                    <option value="High">High</option>
+                    <option value="Medium">Medium</option>
+                    <option value="Low">Low</option>
+                    <option value="Undefined">Undefined</option>
+                 </select>
+                </td>
+            </tr>
+
+            <tr>
+                <td>Distribution</td>
+                <td>
+                <select id="Distribution" name="Distribution" class="form-control">
+                    <option value="Your Organisation Only">Your Organisation Only</option>
+                    <option value="This Community Only">This Community Only</option>
+                    <option value="Connected Communities">Connected Communities</option>
+                    <option value="All Communities">All Communities</option>
+                    <option value="Sharing Group">Sharing Group</option>
+                 </select>
+                </td>
+            </tr>
+
+            <tr>
+                <td>Analysis</td>
+                <td>
+                <select id="Analysis" name="Analysis" class="form-control">
+                    <option value="Initial">Initial</option>
+                    <option value="Ongoing">Ongoing</option>
+                    <option value="Complete">Complete</option>
+                 </select>
+                </td>
+            </tr>
+
+            <tr>
+                <td>Comment</td>
+                <td>
+                    <textarea id="comment" name="comment" rows="5" cols="130"></textarea>
+                </td>
+            </tr>
+
+        </table>
+        <div class="mt-2">
+            <input type="submit" name="submit" value="Add event" class="btn btn-info">
+        </div>
+
+          
+    </form>
+</div>
+
+
+{% endblock content %}

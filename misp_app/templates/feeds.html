@@ -1,0 +1,84 @@
+{% extends "layout.html" %}
+{% block content %}
+    <div class="container">
+        <div class="col-md-12">
+            <div class="content-section">
+                <div class="d-flex">
+                    <a href="#" class="badge badge-success ml-auto">Success</a>
+                    <a href="#" class="badge badge-light" style="background-color:#ae6c53; color:white">Danger</a>
+                </div>
+                <form method="POST" action="">
+                    {{ form.hidden_tag() }}
+                    <fieldset class="form-group">
+                        <legend class="border-bottom mb-4">Feeds from Misp</legend>
+                        <div class="form-group">
+                            {{ form.Category.label(class="form-control-label") }}
+                            {% if form.Category.errors %}
+                               {{ form.Category (class="form-control form-control-lg is-invalid") }}
+                                <div class="invalid-feedback">
+                                    {% for error in form.Category.errors %}
+                                        <span>{{ error }}</span>
+                                    {% endfor %}
+                                </div>
+                            {% else %}
+                                {{ form.Category (class="form-control form-control-lg") }}
+                            {% endif %}
+                        </div>
+                        <div class="form-group">
+                            {{ form.Type.label(class="form-control-label") }}
+                            {% if form.Type.errors %}
+                               {{ form.Type (class="form-control form-control-lg is-invalid") }}
+                                <div class="invalid-feedback">
+                                    {% for error in form.Type.errors %}
+                                        <span>{{ error }}</span>
+                                    {% endfor %}
+                                </div>
+                            {% else %}
+                                {{ form.Type (class="form-control form-control-lg") }}
+                            {% endif %}
+                        </div>
+                        <div class="form-group">
+                            {{ form.Last.label(class="form-control-label") }}
+                            {% if form.Last.errors %}
+                               {{ form.Last (class="form-control form-control-lg is-invalid") }}
+                                <div class="invalid-feedback">
+                                    {% for error in form.Last.errors %}
+                                        <span>{{ error }}</span>
+                                    {% endfor %}
+                                </div>
+                            {% else %}
+                                {{ form.Last (class="form-control form-control-lg") }}
+                            {% endif %}
+                        </div>
+                        <div class="form-check">
+                            {{ form.send(class="form-check-input") }}
+                            {{ form.send.label(class="form-check-label") }}
+                        </div>
+                    </fieldset>
+                    <div class="form-group">
+                        {{ form.submit(class="btn btn-info") }}
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+                    <script type="text/javascript">
+                    let Category_select = document.getElementById('Category');
+                    let Type_select = document.getElementById('Type');
+                    Category_select.onchange = function(){
+                        Category = Category_select.value;
+                        fetch('/feedsAtt/' + Category).then(function(response){
+                            response.json().then(function(data){
+                                let optionHTML = '';
+                                for (let attribut of data.Attributes) {
+                                     optionHTML += '<option value="' + attribut + '">' + attribut + '</option>';
+
+                                }
+                                Type_select.innerHTML = optionHTML;
+
+                            });
+                        });  
+                    }
+ 
+                </script>
+{% endblock content %}

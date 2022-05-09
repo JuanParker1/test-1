@@ -1,0 +1,285 @@
+{% extends "layout.html" %}
+{% block content %}
+<div class="container">
+    <form action="{{ url_for('event',eventid=eventdata['event_id']) }}" method = "POST">
+            <h3>Event id: {{eventdata["event_id"]}}</h3>
+        <table class="table">
+            <tr>
+                <td>Event name</td>
+                <td><input type = "text" id="event_name" name ="event_name" class="form-control" /></td>
+                <script>
+                     document.getElementById('event_name').value="{{eventdata["event_name"]}}";
+                </script>
+            </tr>
+            <tr>
+                <td>Creator org</td>
+                <td><input type = "text" id="Creator_org" name = "Creator_org" class="form-control" /></td>
+                <script>
+                     document.getElementById('Creator_org').value="{{eventdata["Creator_org"]}}";
+                </script>
+            </tr>
+
+            <tr>
+                <td>Owner org</td>
+                <td><input type = "text" id="Owner_org" name = "Owner_org" class="form-control" /></td>
+                <script>
+                     document.getElementById('Owner_org').value="{{eventdata["Owner_org"]}}";
+                </script>
+            </tr>
+
+            <tr>
+                <td>Creator user</td>
+                <td><input type = "text" id="Creator_user" name = "Creator_user" class="form-control"/></td>
+                <script>
+                     document.getElementById('Creator_user').value="{{eventdata["Creator_user"]}}";
+                </script>
+            </tr>
+
+            <tr>
+                <td>Tags</td>
+                <td>
+                    <div class="form-group" data-multiSelect="">
+                        <input type="hidden" id="tags" name="tags"/>
+                        <script>
+                             document.getElementById('tags').value="{{eventdata["tags"]}}";
+                        </script>
+                    </div>
+                </td>
+            </tr>
+
+            <tr>
+                <td>Date</td>
+                <td><input type="date" id="date" name="date" value="2022-04-19" min="2018-01-01" max="2030-12-31"></td>
+                <script>
+                    document.getElementById('date').value="{{eventdata["Date"]}}";
+                </script>
+            </tr>
+
+            <tr>
+                <td>Threat Level</td>
+                <td>
+                <select id = "Threat_Level" name="Threat_Level" class="form-control">
+                    <option value="High">High</option>
+                    <option value="Medium">Medium</option>
+                    <option value="Low">Low</option>
+                    <option value="Undefined">Undefined</option>
+                 </select>
+                    <script>
+                        document.getElementById('Threat_Level').value="{{eventdata["Threat_Level"]}}";
+                    </script>
+                </td>
+            </tr>
+
+            <tr>
+                <td>Distribution</td>
+                <td>
+                <select id="Distribution" name="Distribution" class="form-control">
+                    <option value="Your Organisation Only">Your Organisation Only</option>
+                    <option value="This Community Only">This Community Only</option>
+                    <option value="Connected Communities">Connected Communities</option>
+                    <option value="All Communities">All Communities</option>
+                    <option value="Sharing Group">Sharing Group</option>
+                 </select>
+                    <script>
+                        document.getElementById('Distribution').value="{{eventdata["Distribution"]}}";
+                    </script>
+                </td>
+            </tr>
+
+            <tr>
+                <td>Analysis</td>
+                <td>
+                <select id="Analysis" name="Analysis" class="form-control">
+                    <option value="Initial">Initial</option>
+                    <option value="Ongoing">Ongoing</option>
+                    <option value="Complete">Complete</option>
+                 </select>
+                    <script>
+                        document.getElementById('Analysis').value="{{eventdata["Analysis"]}}";
+                    </script>
+                </td>
+            </tr>
+
+            <tr>
+                <td>Comment</td>
+                <td>
+                    <textarea id="comment" name="comment" rows="5" cols="130"></textarea>
+                    <script>
+                        document.getElementById('comment').value="{{eventdata["Comment"]}}";
+                    </script>
+                </td>
+            </tr>
+
+        </table>
+        <div>
+            <input type="checkbox" name="AddtoReferenceSet" vaalue="true"> Add to Referense set</input>
+        </div>
+        <div>
+            <input type="checkbox" name="AddtoMisp" vaalue="true"> Add to Misp</input>
+        </div>
+        <div class="mt-2">
+            <input type="submit" name="submit" value="submit" class="btn btn-info">
+            <a class="btn btn-danger" data-toggle="modal" data-target="#delete{{lastid}}Modal" href="#"> Delete</a>
+        </div>
+
+          
+    </form>
+</div>
+<div class="d-flex justify-content-end ml-auto align-self-start mt-2 mx-1 mb-2" style="color:white;"><a class="btn btn-info" data-toggle="modal" data-target=".bd-example-modal-lg"> Add Att</a>
+</div>
+<table id="data" class="table table-striped" style="text-align: left;">
+    <thead>
+      <tr class="bg-info text-white">
+        <th style="width: 8%;">Date</th>
+        <th style="width: 14%;">Category</th>
+        <th style="width: 8%;">Type</th>
+        <th>Value</th>
+        <th style="width: 8%;">User</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for att in eventdata["Attributes"] %}
+        <tr>
+          <td>{{att.date_posted.strftime('%Y-%m-%d')}}</td>
+          <td>{{att.Category}}</td>
+          <td>{{att.Type}}</td>
+          <td><a href="{{ url_for('update_att', att_id=att.id) }}">{{att.Value}}</a></td>
+          <td>{{att.author.username}}</td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+
+<div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+            <div class="content-section">
+                <form method="POST" action="{{ url_for('Add_Attributetoevent',lastid=lastid) }}">
+                    {{ form.hidden_tag() }}
+                    <fieldset class="form-group">
+                        <legend class="border-bottom mb-4">Add Attribute</legend>
+                        <div class="form-group">
+                            <div class="d-flex flex-row">
+                            {{ form.Eventid.label(class="form-control-label p-2") }}
+                            </div>
+                            {% if form.Eventid.errors %}
+                               {{ form.Eventid (class="form-control form-control-lg is-invalid") }}
+                                <div class="invalid-feedback">
+                                    {% for error in form.Eventid.errors %}
+                                        <span>{{ error }}</span>
+                                    {% endfor %}
+                                </div>
+                            {% else %}
+                                {{ form.Eventid (class="form-control form-control-lg") }}
+                            {% endif %}
+                        </div>
+                        <div class="form-group">
+                            <div class="d-flex flex-row">
+                            {{ form.Category.label(class="form-control-label p-2") }}
+                            </div>
+                            {% if form.Category.errors %}
+                               {{ form.Category (class="form-control form-control-lg is-invalid") }}
+                                <div class="invalid-feedback">
+                                    {% for error in form.Category.errors %}
+                                        <span>{{ error }}</span>
+                                    {% endfor %}
+                                </div>
+                            {% else %}
+                                {{ form.Category (class="form-control form-control-lg") }}
+                            {% endif %}
+                        </div>
+                        <div class="form-group">
+                            <div class="d-flex flex-row">
+                            {{ form.Type.label(class="form-control-label p-2") }}
+                            </div>
+                            {% if form.Type.errors %}
+                               {{ form.Type (class="form-control form-control-lg is-invalid") }}
+                                <div class="invalid-feedback">
+                                    {% for error in form.Type.errors %}
+                                        <span>{{ error }}</span>
+                                    {% endfor %}
+                                </div>
+                            {% else %}
+                                {{ form.Type (class="form-control form-control-lg") }}
+                            {% endif %}
+                        </div>
+                        <div class="form-group">
+                            <div class="d-flex flex-row">
+                            {{ form.Value.label(class="form-control-label p-2") }}
+                            </div>
+                            {% if form.Value.errors %}
+                               {{ form.Value (class="form-control form-control-lg is-invalid") }}
+                                <div class="invalid-feedback">
+                                    {% for error in form.Value.errors %}
+                                        <span>{{ error }}</span>
+                                    {% endfor %}
+                                </div>
+                            {% else %}
+                                {{ form.Value (class="form-control form-control-lg") }}
+                            {% endif %}
+                        </div>
+                        <div class="form-group">
+                            <div class="d-flex flex-row">
+                            {{ form.Comment.label(class="form-control-label p-2") }}
+                            </div>
+                            {% if form.Comment.errors %}
+                               {{ form.Comment (class="form-control form-control-lg is-invalid") }}
+                                <div class="invalid-feedback">
+                                    {% for error in form.Comment.errors %}
+                                        <span>{{ error }}</span>
+                                    {% endfor %}
+                                </div>
+                            {% else %}
+                                {{ form.Comment (class="form-control form-control-lg") }}
+                            {% endif %}
+                        </div>
+                    </fieldset>
+                    <div class="form-group">
+                        <div class="d-flex flex-row">
+                        {{ form.submit(class="btn btn-outline-info p-2") }}
+                        </div>
+                    </div>
+                </form>
+                <script type="text/javascript">
+                    let Category_select = document.getElementById('Category');
+                    let Type_select = document.getElementById('Type');
+                    Category_select.onchange = function(){
+                        Category = Category_select.value;
+                        fetch('/getAttributes/' + Category).then(function(response){
+                            response.json().then(function(data){
+                                let optionHTML = '';
+                                for (let attribut of data.Attributes) {
+                                     optionHTML += '<option value="' + attribut + '">' + attribut + '</option>';
+
+                                }
+                                Type_select.innerHTML = optionHTML;
+
+                            });
+                        });  
+                    }
+ 
+                </script>
+            </div>
+    </div>
+  </div>
+</div>
+<div class="modal fade" id="delete{{lastid}}Modal" tabindex="-1" role="dialog" aria-labelledby="ddelete{{lastid}}ModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+             <div class="modal-header">
+                  <h5 class="modal-title" id="delete{{lastid}}ModalLabel">Delete Event?</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+            </div>
+            <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                  <form action="{{ url_for('delete_event', eventid=eventdata['event_id']) }}" method="POST">
+                    <input class="btn btn-danger" type="submit" value="Delete">
+                  </form>
+            </div>
+        </div>
+    </div>
+</div> 
+
+{% endblock content %}
